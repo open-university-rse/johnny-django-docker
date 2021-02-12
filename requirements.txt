@@ -6,4 +6,3 @@ numpy
 pandas
 black
 pytest
-pytest-djangorestframework

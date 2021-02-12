@@ -24,3 +24,6 @@ freeze:
 pip_install:
 	sudo docker-compose run web pip install -r requirements.txt 
 
+build:
+	sudo docker-compose build
+

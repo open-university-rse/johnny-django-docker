@@ -12,9 +12,9 @@ down:
 	sudo docker-compose down
 
 m:
-	python3 manage.py migrate
+	 sudo docker-compose run web python3 manage.py migrate
 mm:
-	python3 manage.py makemigrations 
+	sudo docker-compose run web python3 manage.py makemigrations 
 run:
 	python3 manage.py runserver
 

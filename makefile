@@ -26,4 +26,3 @@ pip_install:
 
 build:
 	sudo docker-compose build
-

@@ -29,3 +29,12 @@ build:
 
 test:
 	sudo docker-compose run web pytest
+
+dummy:
+	sudo docker-compose run web python3 manage.py generate_test_db
+
+super:
+	sudo docker-compose run web python3 manage.py generate_supers
+
+flush:
+	sudo docker-compose run web python3 manage.py flush 

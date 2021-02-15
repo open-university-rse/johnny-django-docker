@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from .serializers import UserSerializer, WebsiteActivitySerializer, SearchSerializer
 from .models import Website_activity, Searches
 from django.contrib.auth.models import User
-from rest_framework.views import Response
+from rest_framework.views import Response, APIView
 
 class SearchViewSet(viewsets.ModelViewSet):
     serializer_class = SearchSerializer
@@ -12,4 +12,18 @@ class SearchViewSet(viewsets.ModelViewSet):
 class WebsiteActivityViewSet(viewsets.ModelViewSet):
     serializer_class = WebsiteActivitySerializer
     queryset = Website_activity.objects.all()
-    
+
+class WebsiteActivityAPIViewSet(viewsets.ModelViewSet):
+    serializer_class = WebsiteActivitySerializer
+    queryset = Website_activity.objects.all()
+    def get(self, request, format=None):
+        webActivities = Website_activity.objects.all()
+        serializer = WebsiteActivitySerializer(webActivities, many=True)
+        return Response(serializer.data)
+
+    def post(self,request):
+        serializer = WebsiteActivitySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

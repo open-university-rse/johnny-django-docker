@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'vscode_info',
+    'website_activity',
 ]
 
 MIDDLEWARE = [

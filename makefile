@@ -12,7 +12,7 @@ down:
 	sudo docker-compose down
 
 m:
-	 sudo docker-compose run web python3 manage.py migrate
+	sudo docker-compose run web python3 manage.py migrate
 mm:
 	sudo docker-compose run web python3 manage.py makemigrations 
 run:
@@ -26,3 +26,6 @@ pip_install:
 
 build:
 	sudo docker-compose build
+
+test:
+	sudo docker-compose run web pytest

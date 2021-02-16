@@ -70,5 +70,11 @@ class Command(BaseCommand):
         new_datetime = timezone.make_aware(dt, timezone.utc)
         Website_activity.objects.create(user=thisUser, time=new_datetime , url="https://www.google.com/search?q=+datetime.datetime" )
 
+        thisUser2 = User.objects.get(username="gloynes1")
+        f_time = 1612537600.0
+        dt = datetime.fromtimestamp(int(f_time))
+        new_datetime = timezone.make_aware(dt, timezone.utc)
+        Website_activity.objects.create(user=thisUser2, time=new_datetime , url="https://www.google.com/search?q=Django+Debug+Toolbar" )
+
 
        

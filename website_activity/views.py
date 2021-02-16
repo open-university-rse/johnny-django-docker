@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status
-from .serializers import UserSerializer, WebsiteActivitySerializer, SearchSerializer
+from .serializers import UserSerializer, WebsiteActivitySerializer, SearchSerializer, WebsiteActivityGetSerializer
 from .models import Website_activity, Searches
 from django.contrib.auth.models import User
 from rest_framework.views import Response, APIView
@@ -18,10 +18,11 @@ class WebsiteActivityAPIViewSet(viewsets.ModelViewSet):
     queryset = Website_activity.objects.all()
     def get(self, request, format=None):
         webActivities = Website_activity.objects.all()
-        serializer = WebsiteActivitySerializer(webActivities, many=True)
+        serializer = WebsiteActivityGetSerializer(webActivities)
         return Response(serializer.data)
 
     def post(self,request):
+        print("post: ",request.data )
         serializer = WebsiteActivitySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

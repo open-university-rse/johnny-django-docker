@@ -10,3 +10,4 @@ pytest-django
 pytest-cov
 pytest-pythonpath
 django-extensions
+django-debug-toolbar

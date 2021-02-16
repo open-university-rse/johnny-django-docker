@@ -4,7 +4,7 @@ from django.utils import timezone
 
 # Create your models here.
 class Website_activity(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     time = models.DateTimeField(default=timezone.now)
     url = models.URLField(max_length=200)
     

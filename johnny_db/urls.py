@@ -5,8 +5,8 @@ from website_activity.views import SearchViewSet, WebsiteActivityViewSet, Websit
 
 router = routers.DefaultRouter()
 router.register(r"searches", SearchViewSet, basename='Searches')
-# router.register(r"websites", WebsiteActivityViewSet, basename='Website_activity')
-router.register(r"websites", WebsiteActivityAPIViewSet, basename='Website_activity')
+router.register(r"websites", WebsiteActivityViewSet, basename='Website_activity')
+# router.register(r"websites", WebsiteActivityAPIViewSet, basename='Website_activity')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

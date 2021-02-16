@@ -17,4 +17,4 @@ class WebsiteActivitySerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = Website_activity
-        fields = ["user", "startTime", "endTime", "history"]
+        fields = ["user", "time", "url"]

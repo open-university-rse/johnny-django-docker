@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'vscode_info',
     'website_activity',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

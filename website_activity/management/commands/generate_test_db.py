@@ -2,6 +2,8 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User, Group
 from django.apps import apps
 from django.core import management
+from datetime import datetime
+from django.utils import timezone
 import csv
 
 # import models
@@ -63,7 +65,10 @@ class Command(BaseCommand):
             mock_index += 1
 
         thisUser = User.objects.get(username="cbletsoe0")
-        Website_activity.objects.create(user=thisUser, history=history_json)
+        f_time = 1612537811.0
+        dt = datetime.fromtimestamp(int(f_time))
+        new_datetime = timezone.make_aware(dt, timezone.utc)
+        Website_activity.objects.create(user=thisUser, time=new_datetime , url="https://www.google.com/search?q=+datetime.datetime" )
 
 
        

@@ -8,6 +8,7 @@ import csv
 
 # import models
 from website_activity.models import Searches, Website_activity
+from clipboard.models import Clipboard
 
 MOCK_USER_FILE = "website_activity/management/commands/mock_users.csv"
 MOCK_WEB_HISTORY_FILE = "website_activity/management/commands/mock_users.csv"
@@ -70,11 +71,15 @@ class Command(BaseCommand):
         new_datetime = timezone.make_aware(dt, timezone.utc)
         Website_activity.objects.create(user=thisUser, time=new_datetime , url="https://www.google.com/search?q=+datetime.datetime" )
 
+        Clipboard.objects.create(user= thisUser, time=new_datetime, text="owejcwoeifjcnwofej")
+
+
         thisUser2 = User.objects.get(username="gloynes1")
         f_time = 1612537600.0
         dt = datetime.fromtimestamp(int(f_time))
         new_datetime = timezone.make_aware(dt, timezone.utc)
         Website_activity.objects.create(user=thisUser2, time=new_datetime , url="https://www.google.com/search?q=Django+Debug+Toolbar" )
 
+        Clipboard.objects.create(user= thisUser2, time=new_datetime, text="oiwejcunweoiucnwoeiuxdnwoeincwije")
 
        

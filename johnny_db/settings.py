@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'website_activity',
     'vscode_info',
+    'clipboard',
 ]
 
 MIDDLEWARE = [

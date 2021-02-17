@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Browser Histories</title>
+    <title>Clipboard contents</title>
 </head>
 <body>
 
@@ -10,19 +10,18 @@
     <tr>
         <th>User</th>
         <th>Time</th>
-        <th>Url</th>
+        <th>Text</th>
     </tr>
     {% for item in data %}
     <tr> 
         <td>{{ item.user}}</td>
         <td>{{ item.time}}</td>
-        <td><a href="{{ item.url }}">{{ item.url }}</a> </td>
+        <td>{{ item.text}}</td>
         
     </tr>
     {% endfor %}
     
 </table>
-
 
 </body>
 </html>

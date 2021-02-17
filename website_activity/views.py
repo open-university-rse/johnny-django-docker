@@ -4,6 +4,8 @@ from .serializers import UserSerializer, WebsiteActivitySerializer, SearchSerial
 from .models import Website_activity, Searches
 from django.contrib.auth.models import User
 from rest_framework.views import Response, APIView
+from django.http import HttpResponse
+from django.template import loader
 
 class SearchViewSet(viewsets.ModelViewSet):
     serializer_class = SearchSerializer
@@ -28,3 +30,7 @@ class WebsiteActivityAPIViewSet(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def history(request):
+    template = loader.get_template('history.html')
+    return HttpResponse("Hello, world. You're at the history.")

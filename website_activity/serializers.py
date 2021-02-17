@@ -21,7 +21,7 @@ class WebsiteActivitySerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(write_only=True)
     class Meta:
         model = Website_activity
-        fields = ["user_id", "time", "url"]
+        fields = ["time", "url","user_id"]
 
 class WebsiteActivityGetSerializer(serializers.ModelSerializer):
     user = UsernameSerializer()

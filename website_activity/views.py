@@ -33,9 +33,8 @@ class WebsiteActivityAPIViewSet(viewsets.ModelViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def history(request):
-    now = datetime.datetime.now()
-    t = template.loader.get_template('now.html')
-    c = template.Context({'now': now})
-    html = t.render({'now': now})
+    data = Website_activity.objects.all();
+    t = template.loader.get_template('history.html')
+    html = t.render({'data': data})
 
     return HttpResponse(html)

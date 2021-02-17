@@ -1,1 +1,29 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browser Histories</title>
+</head>
+<body>
+
+<table border = "1">
+    <tr>
+        <th>User</th>
+        <th>Time</th>
+        <th>Url</th>
+    </tr>
+    {% for item in data %}
+    <tr> 
+        <td>{{ item.user }}</td>
+        <td>{{ item.time}}</td>
+        {% comment %} <td>{{ item.url }}</td>    {% endcomment %}
+        <td><a href="{{ item.url }}">{{ item.url }}</a> </td>
+        
+    </tr>
+    {% endfor %}
+    
+</table>
+
+
+</body>
+</html>

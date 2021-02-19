@@ -2,6 +2,13 @@
 # sudo docker-compose run web django-admin startapp vscode_info
 # sudo chown -R $USER:$USER .
 # sudo docker-compose run web django-admin makemigrations
+# http://0.0.0.0:8000/history
+# http://0.0.0.0:8000/clipboard
+
+# API destinations
+# http://0.0.0.0:8000/api/website/
+# http://0.0.0.0:8000/api/clipboard/
+
 
 SHELL := /bin/bash
 

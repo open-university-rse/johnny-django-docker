@@ -13,10 +13,10 @@ class UsernameSerializer(serializers.ModelSerializer):
         fields = ["username"]
 
 class ClipboardSerializer(serializers.ModelSerializer):
-    user_id = serializers.IntegerField(write_only=True)
+    user_id = serializers.IntegerField()
     class Meta:
         model = Clipboard
-        fields = ["time", "url","user_id"]
+        fields = [ "user_id", "time", "text"]
 
 class ClipboardGetSerializer(serializers.ModelSerializer):
     user = UsernameSerializer()

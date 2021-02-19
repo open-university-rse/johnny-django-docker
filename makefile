@@ -49,8 +49,8 @@ flush:
 delete_migrations:
 	find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 	find . -path "*/migrations/*.pyc"  -delete
-	# sudo docker-compose run web python3 manage.py makemigrations
-	# sudo docker-compose run web python3 manage.py migrate --run-syncdb
+	sudo docker-compose run web python3 manage.py makemigrations
+	sudo docker-compose run web python3 manage.py migrate 
 
 showmigrations:
 	sudo docker-compose run web python3 manage.py showmigrations

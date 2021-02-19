@@ -51,3 +51,12 @@ showmigrations:
 reset_db:
 	sudo docker-compose run web python3 manage.py reset_db
 
+reset:
+	sudo docker-compose run web python3 manage.py reset_db
+	find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+	find . -path "*/migrations/*.pyc"  -delete
+	sudo docker-compose run web python3 manage.py makemigrations 
+	sudo docker-compose run web python3 manage.py migrate
+
+
+

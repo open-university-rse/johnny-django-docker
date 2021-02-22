@@ -8,6 +8,7 @@
 # API destinations
 # http://0.0.0.0:8000/api/website/
 # http://0.0.0.0:8000/api/clipboard/
+# http://0.0.0.0:8000/api/file/
 
 
 SHELL := /bin/bash

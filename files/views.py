@@ -11,7 +11,7 @@ from django import template
 # Create your views here.
 
 class FilesAPIViewSet(viewsets.ModelViewSet):
-    serializer_class = FilesGetSerializer
+    serializer_class = FilesPostSerializer
     queryset = Files.objects.all()
     def get(self, request, format=None):
         webActivities = Files.objects.all()

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+
+<table border = "1">
+    <tr>
+        <th>Username</th>
+        <th>Id</th>
+        <th>Email</th>
+    </tr>
+    {% for item in data %}
+    <tr> 
+        <td>{{ item.username}}</td>
+        <td>{{ item.id}}</td>
+        <td>{{ item.email}}</td>
+    </tr>
+    {% endfor %}
+    
+</table>
+
+</body>
+</html>

@@ -17,4 +17,5 @@ urlpatterns = [
     path('history', include('website_activity.urls')),
     path('clipboard', include('clipboard.urls')),
     path('file', include('files.urls')),
+    path("dashboard/", include("dashboard.urls")),
 ]

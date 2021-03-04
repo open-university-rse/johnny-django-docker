@@ -7,7 +7,7 @@ from django.utils import timezone
 import csv
 
 # import models
-from website_activity.models import Searches, Website_activity
+from website_activity.models import Website_activity
 from clipboard.models import Clipboard
 from files.models import Files
 

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'clipboard',
     'files',
     'messaging',
+    'dashboard',
 ]
 
 MIDDLEWARE = [

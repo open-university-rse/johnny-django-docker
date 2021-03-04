@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'vscode_info',
     'clipboard',
     'files',
+    'messaging',
 ]
 
 MIDDLEWARE = [

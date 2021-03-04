@@ -2,6 +2,7 @@
 # sudo docker-compose run web django-admin startapp vscode_info
 # sudo chown -R $USER:$USER .
 # sudo docker-compose run web django-admin makemigrations
+# python manage.py runscript delete_all_questions
 # http://0.0.0.0:8000/history
 # http://0.0.0.0:8000/clipboard
 
@@ -42,7 +43,7 @@ dummy:
 	sudo docker-compose run web python3 manage.py generate_test_db
 
 super:
-	sudo docker-compose run web python3 manage.py generate_supers
+	sudo docker-compose run web python3 manage.py runscript generate_supers
 
 flush:
 	sudo docker-compose run web python3 manage.py flush 
@@ -69,5 +70,6 @@ reset:
 pyclean:
 	find . -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
 
-
+test_message:
+	sudo docker-compose run web python3 manage.py runscript send_test_debug_message
 

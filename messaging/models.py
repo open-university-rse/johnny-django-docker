@@ -2,14 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-MESSAGE_TYPE_DEBUG = 0
-MESSAGE_TYPE_TWITTER = 1
-MESSAGE_TYPE_SLACK = 2
-MESSAGE_TYPE_EMAIL = 3
-MESSAGE_TYPE_IDE = 4
+
 
 # Create your models here.
 class Messaging(models.Model):
+    MESSAGE_TYPE_DEBUG = 0
+    MESSAGE_TYPE_TWITTER = 1
+    MESSAGE_TYPE_SLACK = 2
+    MESSAGE_TYPE_EMAIL = 3
+    MESSAGE_TYPE_IDE = 4
+    
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     time = models.DateTimeField(default=timezone.now)
     text = models.TextField(blank=True)

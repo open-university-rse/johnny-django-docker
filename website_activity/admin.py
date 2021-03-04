@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Website_activity, Searches
+from .models import Website_activity
 
 admin.site.register(Website_activity)
-admin.site.register(Searches)
+

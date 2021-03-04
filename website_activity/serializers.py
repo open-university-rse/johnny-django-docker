@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Website_activity, Searches
+from .models import Website_activity
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,11 +10,7 @@ class UsernameSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["username"]
-class SearchSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    class Meta:
-        model = Searches
-        fields = ["user", "time", "text"]
+
 
 class WebsiteActivitySerializer(serializers.ModelSerializer):
     # user = UsernameSerializer()

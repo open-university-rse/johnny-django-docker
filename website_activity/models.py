@@ -9,8 +9,3 @@ class Website_activity(models.Model):
     url = models.URLField(max_length=200)
     title = models.TextField(blank=True)
     
-
-class Searches(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    time = models.DateTimeField(default=timezone.now)
-    text = models.TextField()

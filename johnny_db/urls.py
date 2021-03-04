@@ -1,12 +1,11 @@
 from rest_framework import routers
 from django.contrib import admin
 from django.urls import path, include
-from website_activity.views import SearchViewSet, WebsiteActivityViewSet, WebsiteActivityAPIViewSet
+from website_activity.views import WebsiteActivityViewSet, WebsiteActivityAPIViewSet
 from clipboard.views import ClipboardAPIViewSet
 from files.views import FilesAPIViewSet
 
 router = routers.DefaultRouter()
-# router.register(r"searches", SearchViewSet, basename='Searches')
 router.register(r"api/website", WebsiteActivityViewSet, basename='Website_activity')
 router.register(r"api/clipboard", ClipboardAPIViewSet, basename='Clipboard')
 router.register(r"api/file", FilesAPIViewSet, basename='Files')

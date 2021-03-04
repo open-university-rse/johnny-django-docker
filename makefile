@@ -66,5 +66,8 @@ reset:
 	sudo docker-compose run web python3 manage.py makemigrations 
 	sudo docker-compose run web python3 manage.py migrate
 
+pyclean:
+	find . -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
+
 
 

@@ -9,17 +9,18 @@
 <table border = "1">
     <tr>
         <th>Username</th>
-        <th>Id</th>
-        <th>Email</th>
+        {% comment %} <th>Id</th>
+        <th>Email</th> {% endcomment %}
+        <th>Num files</th>
     </tr>
-    {% for item in data %}
+    {% for user in users %}
     <tr> 
-        <td>{{ item.username}}</td>
-        <td>{{ item.id}}</td>
-        <td>{{ item.email}}</td>
+        <td>{{user}}</td>
+        <td>{{ fileCounts}}</td>
+               
     </tr>
     {% endfor %}
-    
+
 </table>
 
 </body>

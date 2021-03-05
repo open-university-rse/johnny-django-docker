@@ -8,3 +8,5 @@ class Files(models.Model):
     time = models.DateTimeField(default=timezone.now)
     text = models.TextField(blank=True)
     path = models.TextField(blank=True)
+
+

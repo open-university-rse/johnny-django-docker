@@ -30,16 +30,17 @@ def countUserFiles(user):
 
 def home_dashboard(request):
     users = User.objects.all()
-    fileCounts = []
+    data = {i:{} for i in range(users.count())}
 
-    for u in users:
+    for index, u in enumerate(users):
         numFiles = countUserFiles(user=u)
-        fileCounts.append(numFiles)
+        di = {"name":u.username, "numfiles":numFiles }
+        data[index].update(di)
 
     t = template.loader.get_template("dashboard.html")
-    html = t.render({"users": users, "fileCounts": fileCounts})
-    data = dict(zip(users, fileCounts))
-    print("data",data)
+    html = t.render({'data': data})
+    print({'data': data})
+    
     return HttpResponse(html)
 
 # def home_dashboard(request):

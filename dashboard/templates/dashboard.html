@@ -5,23 +5,21 @@
     <title>Dashboard</title>
 </head>
 <body>
-
 <table border = "1">
     <tr>
         <th>Username</th>
-        {% comment %} <th>Id</th>
-        <th>Email</th> {% endcomment %}
+        <th>Id</th>
         <th>Num files</th>
     </tr>
-    {% for user in users %}
+    {% for item in data %}
     <tr> 
-        <td>{{user}}</td>
-        <td>{{ fileCounts}}</td>
+        <td>*******</td>
+        <td>{{item}}</td>
+        <td>{{item.name}}</td>
                
     </tr>
     {% endfor %}
 
 </table>
-
 </body>
 </html>

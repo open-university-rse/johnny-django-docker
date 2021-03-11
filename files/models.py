@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+import subprocess
 
 # Create your models here.
 class Files(models.Model):
@@ -14,5 +15,8 @@ class Metrics(models.Model):
     time = models.DateTimeField(default=timezone.now)
     bandit = models.TextField(blank=True)
 
-# def calculateMetrics(fileName):
+def calculateMetrics(file):
+    process = subprocess.run(['echo', 'Even more output'], 
+                         stdout=subprocess.PIPE, 
+                         universal_newlines=True)
     

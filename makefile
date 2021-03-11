@@ -37,7 +37,7 @@ build:
 	sudo docker-compose build
 
 test:
-	sudo docker-compose run web pytest
+	sudo docker-compose run web pytest -s
 
 dummy:
 	sudo docker-compose run web python3 manage.py generate_test_db
@@ -65,7 +65,10 @@ reset:
 	find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 	find . -path "*/migrations/*.pyc"  -delete
 	sudo docker-compose run web python3 manage.py makemigrations 
+	sudo docker-compose run web python3 manage.py migrate auth
+	sudo docker-compose run web python3 manage.py migrate files
 	sudo docker-compose run web python3 manage.py migrate
+	sudo docker-compose run web python3 manage.py migrate --run-syncdb
 
 pyclean:
 	find . -regex '^.*\(__pycache__\|\.py[co]\)$' -delete

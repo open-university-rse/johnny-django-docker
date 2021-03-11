@@ -37,7 +37,7 @@ build:
 	sudo docker-compose build
 
 test:
-	sudo docker-compose run web pytest -s
+	sudo docker-compose run web pytest -s -v
 
 dummy:
 	sudo docker-compose run web python3 manage.py generate_test_db

@@ -9,4 +9,10 @@ class Files(models.Model):
     text = models.TextField(blank=True)
     path = models.TextField(blank=True)
 
+class Metrics(models.Model):
+    file = models.ForeignKey(Files, on_delete=models.CASCADE)
+    time = models.DateTimeField(default=timezone.now)
+    bandit = models.TextField(blank=True)
 
+# def calculateMetrics(fileName):
+    

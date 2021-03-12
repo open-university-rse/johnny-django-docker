@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.conf import settings
 import subprocess
 import tempfile
+import json
 
 # Create your models here.
 class Files(models.Model):
@@ -13,7 +15,6 @@ class Files(models.Model):
 
     # metrics
     bandit = models.TextField(blank=True)
-    bandit = models.JsonField(blank=True)
     loc = models.IntegerField(blank=True)
     lloc = models.IntegerField(blank=True)
     sloc = models.IntegerField(blank=True)
@@ -22,26 +23,53 @@ class Files(models.Model):
     blank = models.IntegerField(blank=True)
     singleComments = models.IntegerField(blank=True)
 
-# class Metrics(models.Model):
-#     file = models.ForeignKey(Files, on_delete=models.CASCADE)
-#     time = models.DateTimeField(default=timezone.now)
-#     bandit = models.TextField(blank=True)
-#     loc = models.IntegerField(blank=True)
-#     lloc = models.IntegerField(blank=True)
-#     sloc = models.IntegerField(blank=True)
-#     comments = models.IntegerField(blank=True)
-#     multi = models.IntegerField(blank=True)
-#     blank = models.IntegerField(blank=True)
-#     singleComments = models.IntegerField(blank=True)
-
 def getBanditResult(fileName):
     process = subprocess.run(
-        ["bandit","-f", "json", fileName], stdout=subprocess.PIPE, universal_newlines=True
+        ["bandit", "-f", "json", fileName],
+        stdout=subprocess.PIPE,
+        universal_newlines=True,
     )
     return process.stdout
+
 
 def getRadonResult(fileName):
     process = subprocess.run(
-        ["radon", "raw", "-j", fileName], stdout=subprocess.PIPE, universal_newlines=True
+        ["radon", "raw", "-j", fileName],
+        stdout=subprocess.PIPE,
+        universal_newlines=True,
     )
     return process.stdout
+
+
+def createFileAndMetrics(user, time, text, path):
+    # create file for bandit and radon 
+    filename = settings.TEST_DIR + "createFileAndMetrics.py"
+    f = open(filename, "w")
+    f.write(text)
+    f.close()
+    
+    # so metrics
+    bandit = getBanditResult(filename)
+    radon = getRadonResult(filename)
+
+    # load radon json
+    j = json.loads(radon)
+
+    f = Files.objects.create(
+        user=user,
+        time=time,
+        text=text,
+        path=path,
+        bandit=bandit,
+        loc=j[filename]['loc'],
+        lloc=j[filename]['lloc'],
+        sloc=j[filename]['sloc'],
+        comments=j[filename]['comments'],
+        multi=j[filename]['multi'],
+        blank=j[filename]['blank'],
+        singleComments=j[filename]['single_comments'],
+    )
+
+    return f
+
+

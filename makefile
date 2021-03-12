@@ -15,13 +15,14 @@
 SHELL := /bin/bash
 
 up:
-	sudo docker-compose up
+	sudo docker-compose up --remove-orphans
 
 down:
 	sudo docker-compose down
 
 m:
 	sudo docker-compose run web python3 manage.py migrate
+
 mm:
 	sudo docker-compose run web python3 manage.py makemigrations 
 run:
@@ -75,4 +76,7 @@ pyclean:
 
 test_message:
 	sudo docker-compose run web python3 manage.py runscript send_test_debug_message
+
+user:
+	sudo chown -R $USER:$USER .
 

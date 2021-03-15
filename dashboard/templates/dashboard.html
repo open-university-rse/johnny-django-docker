@@ -8,17 +8,16 @@
 <table border = "1">
     <tr>
         <th>Username</th>
-        <th>Id</th>
         <th>Num files</th>
     </tr>
     {% for item in data %}
     <tr> 
-        <td>*******</td>
-        <td>{{item}}</td>
+        
         <td>{{item.name}}</td>
+        <td>{{item.numfiles}}</td>
                
     </tr>
-    {% endfor %}
+    {% endfor %} 
 
 </table>
 </body>

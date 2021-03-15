@@ -9,7 +9,7 @@ import csv
 # import models
 from website_activity.models import Website_activity
 from clipboard.models import Clipboard
-from files.models import Files
+from files.models import Files, createFileAndMetrics
 
 MOCK_USER_FILE = "website_activity/management/commands/mock_users.csv"
 MOCK_WEB_HISTORY_FILE = "website_activity/management/commands/mock_users.csv"
@@ -74,8 +74,7 @@ class Command(BaseCommand):
 
         Clipboard.objects.create(user= thisUser, time=new_datetime, text="owejcwoeifjcnwofej")
 
-        Files.objects.create(user= thisUser, time=new_datetime, text="print('hello world')", path = "home/paul/Desktop/intro.py")
-
+        createFileAndMetrics(user=thisUser, time=new_datetime, text="print('hello world')", path = "home/paul/Desktop/intro.py")
 
         thisUser2 = User.objects.get(username="gloynes1")
         f_time = 1612537600.0
@@ -85,5 +84,5 @@ class Command(BaseCommand):
 
         Clipboard.objects.create(user= thisUser2, time=new_datetime, text="oiwejcunweoiucnwoeiuxdnwoeincwije")
 
-        Files.objects.create(user= thisUser2, time=new_datetime, text="var = 2 *56", path = "home/paul/Desktop/math.py")
+        createFileAndMetrics(user= thisUser2, time=new_datetime, text="var = 2 *56", path = "home/paul/Desktop/math.py")
 

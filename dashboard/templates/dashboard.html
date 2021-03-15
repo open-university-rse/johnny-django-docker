@@ -9,12 +9,16 @@
     <tr>
         <th>Username</th>
         <th>Num files</th>
+        <th>Num Clips</th>
+        <th>Num links</th>
     </tr>
     {% for item in data %}
     <tr> 
         
         <td>{{item.name}}</td>
         <td>{{item.numfiles}}</td>
+        <td>{{item.numclips}}</td>
+        <td>{{item.numlinks}}</td>
                
     </tr>
     {% endfor %} 

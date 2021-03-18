@@ -18,4 +18,5 @@ urlpatterns = [
     path('clipboard', include('clipboard.urls')),
     path('file', include('files.urls')),
     path("dashboard/", include("dashboard.urls")),
+    path("user/<int:user_id>", include("dashboard.urls")),
 ]

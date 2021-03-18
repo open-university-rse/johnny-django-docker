@@ -30,6 +30,7 @@ def home_dashboard(request):
         numFiles = countUserFiles(user=u)
         di = {
             "name": u.username,
+            "id": u.id,
             "numfiles": countUserFiles(user=u),
             "numclips": countUserClipboards(user=u),
             "numlinks": countUserWebsites(user=u)
@@ -38,5 +39,13 @@ def home_dashboard(request):
 
     t = template.loader.get_template("dashboard.html")
     html = t.render({"data": data})
+
+    return HttpResponse(html)
+
+def user_dashboard(request, user_id):
+    users = User.objects.all(id=user_id)
+    
+    t = template.loader.get_template("user_dashboard.html")
+    html = t.render({"user_id": user_id})
 
     return HttpResponse(html)

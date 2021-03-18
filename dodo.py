@@ -56,17 +56,6 @@ def task_super():
     return {"actions": [cmd], "verbosity": VERBOSITY_LEVEL}
 
 
-# sudo docker-compose run web python3 manage.py reset_db
-# 	find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
-# 	find . -path "*/migrations/*.pyc"  -delete
-# 	find . -path "*.sqlite3"  -delete
-# 	sudo docker-compose run web python3 manage.py makemigrations
-# 	sudo docker-compose run web python3 manage.py migrate auth
-# 	sudo docker-compose run web python3 manage.py migrate files
-# 	sudo docker-compose run web python3 manage.py migrateimport platform
-# 	sudo docker-compose run web python3 manage.py migrate --run-syncdb
-
-
 def task_reset():
     cmd = (
         MANAGE_PY
@@ -86,4 +75,8 @@ def task_reset():
         + OS_CMD_SEP
     )
 
+    return {"actions": [cmd], "verbosity": VERBOSITY_LEVEL}
+
+def task_open_web():
+    cmd = "firefox -new-tab " + "http://0.0.0.0:8000/"
     return {"actions": [cmd], "verbosity": VERBOSITY_LEVEL}

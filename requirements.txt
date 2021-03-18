@@ -12,3 +12,4 @@ django-extensions
 django-debug-toolbar
 bandit
 radon
+prospector[with_everything]

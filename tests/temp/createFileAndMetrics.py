@@ -1,1 +1,2 @@
-var = 2 *56
+import pickle
+assert true

@@ -16,8 +16,7 @@
     </thead>
     {% for item in data %}
     <tr> 
-        
-        <td>{{item.name}}</td>
+        <td> <a href="/dashboard/history/{{item.name}}"> {{item.name}} </a> </td>
         <td>{{item.id}}</td>
         <td>{{item.numfiles}}</td>
         <td>{{item.numclips}}</td>

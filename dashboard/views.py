@@ -42,10 +42,10 @@ def home_dashboard(request):
 
     return HttpResponse(html)
 
-def user_dashboard(request, user_id):
-    users = User.objects.all(id=user_id)
+def user_dashboard(request, username):
+    users = User.objects.all(username=username)
     
     t = template.loader.get_template("user_dashboard.html")
-    html = t.render({"user_id": user_id})
+    html = t.render({"user_id": username})
 
     return HttpResponse(html)

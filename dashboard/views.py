@@ -33,7 +33,7 @@ def home_dashboard(request):
             "id": u.id,
             "numfiles": countUserFiles(user=u),
             "numclips": countUserClipboards(user=u),
-            "numlinks": countUserWebsites(user=u)
+            "numlinks": countUserWebsites(user=u),
         }
         data.append(dict(di))
 
@@ -42,6 +42,7 @@ def home_dashboard(request):
 
     return HttpResponse(html)
 
+
 def user_dashboard(request, username):
     user = User.objects.get(username=username)
     files = Files.objects.filter(user=user)
@@ -49,6 +50,46 @@ def user_dashboard(request, username):
     webs = Website_activity.objects.filter(user=user)
 
     t = template.loader.get_template("user_dashboard.html")
-    html = t.render({"username": user,"files": files, "clipboards": clipboards, "webs":webs})
+    html = t.render(
+        {"username": user, "files": files, "clipboards": clipboards, "webs": webs}
+    )
+
+    return HttpResponse(html)
+
+
+def user_history_dashboard(request, username):
+    user = User.objects.get(username=username)
+    files = Files.objects.filter(user=user)
+    clipboards = Clipboard.objects.filter(user=user)
+    webs = Website_activity.objects.filter(user=user)
+
+    # create events dictionary and populate
+    data = []
+    for file in files:
+        event = {
+            "time": file.time,
+            "type": "File",
+            "info": file.text,
+        }
+        data.append(dict(event))
+    
+    for clip in clipboards:
+        event = {
+            "time": clip.time,
+            "type": "Paste",
+            "info": clip.text,
+        }
+        data.append(dict(event))
+
+    for web in webs:
+        event = {
+            "time": web.time,
+            "type": "Website",
+            "info": web.url,
+        }
+        data.append(dict(event))
+
+    t = template.loader.get_template("user_history_dashboard.html")
+    html = t.render({"data": data})
 
     return HttpResponse(html)

@@ -53,7 +53,6 @@ def user_dashboard(request, username):
     html = t.render(
         {"username": user, "files": files, "clipboards": clipboards, "webs": webs}
     )
-
     return HttpResponse(html)
 
 
@@ -92,6 +91,6 @@ def user_history_dashboard(request, username):
     data.sort(key=lambda e: e['time'])
 
     t = template.loader.get_template("user_history_dashboard.html")
-    html = t.render({"data": data})
+    html = t.render({"data": data, "username": username})
 
     return HttpResponse(html)

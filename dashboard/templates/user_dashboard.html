@@ -1,23 +1,25 @@
 {% extends 'base.html' %}
 {% block header %}
-   
 {% endblock %}
 
 {% block content %}
 
-<table border = "1">
-    <tr>
-        <th>Time</th>
-        <th>Path</th>
-        <th>Text</th>
-        <th>loc</th>
-        <th>lloc</th>
-        <th>sloc</th>
-        <th>Comments</th>
-        <th>Multi</th>
-        <th>Blank</th>
-        <th>Single Comments</th>
-    </tr>
+<table class="table table-bordered table-sm ">
+    <caption>Files</caption>
+    <thead class="thead-dark">
+        <tr>
+            <th>Time</th>
+            <th>Path</th>
+            <th>Text</th>
+            <th>loc</th>
+            <th>lloc</th>
+            <th>sloc</th>
+            <th>Comments</th>
+            <th>Multi</th>
+            <th>Blank</th>
+            <th>Single Comments</th>
+        </tr>
+    </thead>
     {% for file in files %}
     <tr> 
         
@@ -37,12 +39,15 @@
 
 </table>
 
-<table border = "1">
-    <tr>
-        <th>Time</th>
-        <th>Text</th>
-        
-    </tr>
+<table class="table table-bordered table-sm ">
+    <caption>Clipboard Contents</caption>
+    <thead class="thead-dark">
+        <tr>
+            <th>Time</th>
+            <th>Text</th>
+            
+        </tr>
+     </thead>
     {% for clipboard in clipboards %}
     <tr> 
         
@@ -54,13 +59,16 @@
 
 </table>
 
-<table border = "1">
-    <tr>
-        <th>Time</th>
-        <th>Url</th>
-        <th>Title</th>
-        
-    </tr>
+<table class="table table-bordered table-sm ">
+    <caption>Websites Visited</caption>
+    <thead class="thead-dark">
+        <tr>
+            <th>Time</th>
+            <th>Url</th>
+            <th>Title</th>
+            
+        </tr>
+    </thead>
     {% for web in webs %}
     <tr> 
         

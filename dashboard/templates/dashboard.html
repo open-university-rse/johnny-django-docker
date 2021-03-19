@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 {% block header %}
-   
 {% endblock %}
 
 {% block content %}
-<table border = "1">
-    <tr>
-        <th>Username</th>
-        <th>ID</th>
-        <th>Num files</th>
-        <th>Num Clips</th>
-        <th>Num links</th>
-    </tr>
+<table class="table table-bordered table-sm">
+    <caption>Users</caption>
+    <thead class="thead-dark">
+        <tr>
+            <th>Username</th>
+            <th>ID</th>
+            <th>Num files</th>
+            <th>Num Clips</th>
+            <th>Num links</th>
+        </tr>
+    </thead>
     {% for item in data %}
     <tr> 
         

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <title>SERVICE</title>
+
+   
+    {% block header %}
+    {% endblock %}
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <span class="badge badge-warning">Beta</span>&nbsp;
+    <a class="navbar-brand text-light" href="{% url 'dashboard' %}">
+        Johnny @ The OU Dashboard
+    </a>
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/" target="_new">Home</a>
+            </li>
+            {% comment %} <li class="nav-item active">
+<!--                <a class="nav-link" href="/dashboard/">Linkworker <span class="sr-only">(current)</span></a>-->
+                <a class="nav-link" href="/dashboard/linkworkers">Linkworkers <span class="sr-only">(current)</span></a>
+            </li> {% endcomment %}
+            {% comment %} <li class="nav-item">
+                <a class="nav-link" href="/dashboard/pacs" target="_new">PACs</a>
+            </li> {% endcomment %}
+
+            
+        </ul>
+
+
+</nav>
+<div class="container m-3">
+
+    {% block content %}
+    {% endblock %}
+
+</div>
+<br/>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <p class="text-light">&copy; Johnny Project/
+        <a class="text-light" href="http://www.open.ac.uk">The Open University</a>
+        2021
+    </p>
+</nav>
+
+</body>
+</html>

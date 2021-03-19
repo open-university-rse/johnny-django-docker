@@ -88,6 +88,8 @@ def user_history_dashboard(request, username):
             "info": web.url,
         }
         data.append(dict(event))
+    # sort into date order 
+    data.sort(key=lambda e: e['time'])
 
     t = template.loader.get_template("user_history_dashboard.html")
     html = t.render({"data": data})

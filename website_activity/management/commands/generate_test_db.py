@@ -70,11 +70,15 @@ class Command(BaseCommand):
         f_time = 1612537811.0
         dt = datetime.fromtimestamp(int(f_time))
         new_datetime = timezone.make_aware(dt, timezone.utc)
-        Website_activity.objects.create(user=thisUser, time=new_datetime , url="https://www.google.com/search?q=+datetime.datetime" )
+        
+        time = datetime(2012, 1, 14, 12, 0, 0, tzinfo=timezone.utc)
+        Website_activity.objects.create(user=thisUser, time=time, url="https://www.google.com/search?q=+datetime.datetime" )
 
-        Clipboard.objects.create(user= thisUser, time=new_datetime, text="owejcwoeifjcnwofej")
+        time = datetime(2012, 1, 14, 12, 1, 0, tzinfo=timezone.utc)
+        Clipboard.objects.create(user= thisUser, time=time, text="owejcwoeifjcnwofej")
 
-        createFileAndMetrics(user=thisUser, time=new_datetime, text="print('hello world')", path = "home/paul/Desktop/intro.py")
+        time = datetime(2012, 1, 14, 12, 2, 0, tzinfo=timezone.utc)
+        createFileAndMetrics(user=thisUser, time=time, text="print('hello world')", path = "home/paul/Desktop/intro.py")
 
         thisUser2 = User.objects.get(username="gloynes1")
         f_time = 1612537600.0

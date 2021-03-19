@@ -2,28 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Dashboard for {{username}} </title>
 </head>
 <body>
-{{user_id}}
-{% comment %} <table border = "1">
+
+<table border = "1">
     <tr>
-        <th>Username</th>
-        <th>Num files</th>
-        <th>Num Clips</th>
-        <th>Num links</th>
+        <th>Time</th>
+        <th>Path</th>
+        <th>Text</th>
+        <th>loc</th>
+        <th>lloc</th>
+        <th>sloc</th>
+        <th>Comments</th>
+        <th>Multi</th>
+        <th>Blank</th>
+        <th>Single Comments</th>
     </tr>
-    {% for item in data %}
+    {% for file in files %}
     <tr> 
         
-        <td>{{item.name}}</td>
-        <td>{{item.numfiles}}</td>
-        <td>{{item.numclips}}</td>
-        <td>{{item.numlinks}}</td>
+        <td>{{file.time}}</td>
+        <td>{{file.path}}</td>
+        <td>{{file.text}}</td>
+        <td>{{file.loc}}</td>
+        <td>{{file.lloc}}</td>
+        <td>{{file.sloc}}</td>
+        <td>{{file.comments}}</td>
+        <td>{{file.multi}}</td>
+        <td>{{file.blank}}</td>
+        <td>{{file.singleComments}}</td>     
                
     </tr>
     {% endfor %} 
 
-</table> {% endcomment %}
+</table>
+
+<table border = "1">
+    <tr>
+        <th>Time</th>
+        <th>Text</th>
+        
+    </tr>
+    {% for clipboard in clipboards %}
+    <tr> 
+        
+        <td>{{clipboard.time}}</td>
+        <td>{{clipboard.text}}</td>
+               
+    </tr>
+    {% endfor %} 
+
+</table>
+
+<table border = "1">
+    <tr>
+        <th>Time</th>
+        <th>Url</th>
+        <th>Title</th>
+        
+    </tr>
+    {% for web in webs %}
+    <tr> 
+        
+        <td>{{web.time}}</td>
+        <td>{{web.url}}</td>
+        <td>{{web.title}}</td>
+               
+    </tr>
+    {% endfor %} 
+
+</table>
+
 </body>
 </html>

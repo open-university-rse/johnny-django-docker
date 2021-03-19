@@ -43,9 +43,12 @@ def home_dashboard(request):
     return HttpResponse(html)
 
 def user_dashboard(request, username):
-    users = User.objects.all(username=username)
-    
+    user = User.objects.get(username=username)
+    files = Files.objects.filter(user=user)
+    clipboards = Clipboard.objects.filter(user=user)
+    webs = Website_activity.objects.filter(user=user)
+
     t = template.loader.get_template("user_dashboard.html")
-    html = t.render({"user_id": username})
+    html = t.render({"username": user,"files": files, "clipboards": clipboards, "webs":webs})
 
     return HttpResponse(html)

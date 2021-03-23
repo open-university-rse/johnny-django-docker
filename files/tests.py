@@ -100,6 +100,8 @@ class FilesTest(TestCase):
         self.assertEqual(newFile.blank, 0)
         self.assertEqual(newFile.singleComments, 0)
 
+        self.assertEqual(newFile.banditIssues, '["B101"]')
+
         report = newFile.bandit
         j = json.loads(report)
         self.assertEqual(j["results"][0]["test_id"], "B101")
@@ -130,6 +132,8 @@ class FilesTest(TestCase):
         self.assertEqual(newFile.multi, 0)
         self.assertEqual(newFile.blank, 0)
         self.assertEqual(newFile.singleComments, 0)
+
+        self.assertEqual(newFile.banditIssues, '["B403", "B101"]')
 
         report = newFile.bandit
         j = json.loads(report)

@@ -6,6 +6,7 @@ import subprocess
 import tempfile
 import json
 
+
 # Create your models here.
 class Files(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -15,6 +16,7 @@ class Files(models.Model):
 
     # metrics
     bandit = models.TextField(blank=True)
+    banditIssues = models.TextField(blank=True)
     loc = models.IntegerField(blank=True)
     lloc = models.IntegerField(blank=True)
     sloc = models.IntegerField(blank=True)
@@ -23,6 +25,7 @@ class Files(models.Model):
     blank = models.IntegerField(blank=True)
     singleComments = models.IntegerField(blank=True)
     prospector = models.TextField(blank=True)
+
 
 def getBanditResult(fileName):
     process = subprocess.run(
@@ -41,6 +44,7 @@ def getRadonResult(fileName):
     )
     return process.stdout
 
+
 def getProspectorResult(fileName):
     process = subprocess.run(
         ["prospector", "--output-format", "json", "--without-tool", "bandit", fileName],
@@ -51,16 +55,23 @@ def getProspectorResult(fileName):
 
 
 def createFileAndMetrics(user, time, text, path):
-    # create file for bandit and radon 
+    # create file for bandit and radon
     filename = settings.TEST_DIR + "createFileAndMetrics.py"
     f = open(filename, "w")
     f.write(text)
     f.close()
-    
+
     # so metrics
     bandit = getBanditResult(filename)
     radon = getRadonResult(filename)
     prospector = getProspectorResult(filename)
+
+    banditIssueString = []
+    banditJson = json.loads(bandit)
+    for result in banditJson["results"]:
+        print(result["test_id"])
+        banditIssueString.append(result["test_id"])
+
 
     # load radon json
     j = json.loads(radon)
@@ -71,16 +82,15 @@ def createFileAndMetrics(user, time, text, path):
         text=text,
         path=path,
         bandit=bandit,
-        loc=j[filename]['loc'],
-        lloc=j[filename]['lloc'],
-        sloc=j[filename]['sloc'],
-        comments=j[filename]['comments'],
-        multi=j[filename]['multi'],
-        blank=j[filename]['blank'],
-        singleComments=j[filename]['single_comments'],
+        banditIssues=json.dumps(banditIssueString),
+        loc=j[filename]["loc"],
+        lloc=j[filename]["lloc"],
+        sloc=j[filename]["sloc"],
+        comments=j[filename]["comments"],
+        multi=j[filename]["multi"],
+        blank=j[filename]["blank"],
+        singleComments=j[filename]["single_comments"],
         prospector=prospector,
     )
 
     return f
-
-

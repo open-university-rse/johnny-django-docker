@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<table class="table table-bordered table-sm ">
+    <caption>File history for {{username}}</caption>
+    <thead class="thead-dark">
+        <tr>
+            <th>Time</th>
+            <th>Path</th>
+            <th>Text</th>
+            <th>loc</th>
+            <th>lloc</th>
+            <th>sloc</th>
+            <th>Comments</th>
+            <th>Multi</th>
+            <th>Blank</th>
+            <th>Single Comments</th>
+        </tr>
+    </thead>
+    {% for file in files %}
+    <tr> 
+        
+        <td>{{file.time}}</td>
+        <td>{{file.path}}</td>
+        <td>{{file.text}}</td>
+        <td>{{file.loc}}</td>
+        <td>{{file.lloc}}</td>
+        <td>{{file.sloc}}</td>
+        <td>{{file.comments}}</td>
+        <td>{{file.multi}}</td>
+        <td>{{file.blank}}</td>
+        <td>{{file.singleComments}}</td>     
+               
+    </tr>
+    {% endfor %} 
+
+</table>
+
+{% endblock %}

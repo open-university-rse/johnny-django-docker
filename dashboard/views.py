@@ -94,3 +94,13 @@ def user_history_dashboard(request, username):
     html = t.render({"data": data, "username": username})
 
     return HttpResponse(html)
+
+def userFilesDashboard(request, username):
+    user = User.objects.get(username=username)
+    files = Files.objects.filter(user=user)
+    
+    t = template.loader.get_template("user_files_dashboard.html")
+    html = t.render(
+        {"username": username, "files": files}
+    )
+    return HttpResponse(html)

@@ -90,3 +90,12 @@ class Command(BaseCommand):
 
         createFileAndMetrics(user= thisUser2, time=new_datetime, text="var = 2 *56", path = "home/paul/Desktop/math.py")
 
+        # add me as a user
+        paul = User.objects.create_user(
+                first_name='Paul',
+                last_name='Lunn',
+                username='paulilunn',
+                email='paul@johnny.co.uk',
+                password="password",
+            )
+

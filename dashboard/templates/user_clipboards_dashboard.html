@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<table class="table table-bordered table-sm ">
+    <caption>Clipboard Contents</caption>
+    <thead class="thead-dark">
+        <tr>
+            <th>Time</th>
+            <th>Text</th>
+            
+        </tr>
+     </thead>
+    {% for clipboard in clipboards %}
+    <tr> 
+        
+        <td>{{clipboard.time}}</td>
+        <td>{{clipboard.text}}</td>
+               
+    </tr>
+    {% endfor %} 
+
+</table>
+
+{% endblock %}

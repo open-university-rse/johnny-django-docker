@@ -104,3 +104,24 @@ def userFilesDashboard(request, username):
         {"username": username, "files": files}
     )
     return HttpResponse(html)
+
+def userWebsDashboard(request, username):
+    user = User.objects.get(username=username)
+    webs = Website_activity.objects.filter(user=user)
+    
+    t = template.loader.get_template("user_web_dashboard.html")
+    html = t.render(
+        {"username": username, "webs": webs}
+    )
+    return HttpResponse(html)
+
+def userClipboardsDashboard(request, username):
+    user = User.objects.get(username=username)
+    clipboards = Clipboard.objects.filter(user=user)
+    
+    t = template.loader.get_template("user_clipboards_dashboard.html")
+    html = t.render(
+        {"username": username, "clipboards": clipboards}
+    )
+    return HttpResponse(html)
+

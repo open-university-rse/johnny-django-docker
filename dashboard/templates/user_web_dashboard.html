@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<table class="table table-bordered table-sm ">
+    <caption>Websites Visited by {{username}}</caption>
+    <thead class="thead-dark">
+        <tr>
+            <th>Time</th>
+            <th>Url</th>
+            <th>Title</th>
+            
+        </tr>
+    </thead>
+    {% for web in webs %}
+    <tr> 
+        
+        <td>{{web.time}}</td>
+        <td>{{web.url}}</td>
+        <td>{{web.title}}</td>
+               
+    </tr>
+    {% endfor %} 
+
+</table>
+
+{% endblock %}

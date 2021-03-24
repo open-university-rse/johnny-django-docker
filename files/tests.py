@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Files, getBanditResult, getRadonResult, createFileAndMetrics, getProspectorResult
+from .models import Files, getBanditResult, getRadonResult, createFileAndMetrics
 from django.utils import timezone
 from freezegun import freeze_time
 import datetime
@@ -51,15 +51,6 @@ class FilesTest(TestCase):
         j = json.loads(report)
         self.assertEqual(j["results"][0]["test_id"], "B101")
 
-    def testGetProspector(self):
-        filename = settings.TEST_DIR + "testGetProspector.py"
-        f = open(filename, "w")
-        f.write("assert true")
-        f.close()
-
-        report = getProspectorResult(filename)
-        j = json.loads(report)
-        self.assertEqual(j["summary"]["libraries"], ['django'])
 
     def testGetRadonFile(self):
         # {"tests/temp/testGetRadonFile.py": {"loc": 1, "lloc": 1, "sloc": 1, "comments": 0, "multi": 0, "blank": 0, "single_comments": 0}}
@@ -106,10 +97,6 @@ class FilesTest(TestCase):
         j = json.loads(report)
         self.assertEqual(j["results"][0]["test_id"], "B101")
 
-        pros = newFile.prospector
-        j = json.loads(pros)
-        self.assertEqual(j["summary"]["libraries"], ['django'])
-
 
     def testCreateFileAndMetrics2(self):
         text = "import pickle\nassert true\n"
@@ -139,7 +126,3 @@ class FilesTest(TestCase):
         j = json.loads(report)
         self.assertEqual(j["results"][0]["test_id"], "B403")
         self.assertEqual(j["results"][1]["test_id"], "B101")
-
-        pros = newFile.prospector
-        j = json.loads(pros)
-        self.assertEqual(j["summary"]["libraries"], ['django'])

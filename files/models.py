@@ -24,8 +24,7 @@ class Files(models.Model):
     multi = models.IntegerField(blank=True)
     blank = models.IntegerField(blank=True)
     singleComments = models.IntegerField(blank=True)
-    prospector = models.TextField(blank=True)
-    
+
 
 def runProcess(commands):
     process = subprocess.run(
@@ -43,12 +42,6 @@ def getBanditResult(fileName):
 
 def getRadonResult(fileName):
     commands = ["radon", "raw", "-j", fileName]
-    stdout = runProcess(commands)
-    return stdout
-
-
-def getProspectorResult(fileName):
-    commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "vulture",  fileName]
     stdout = runProcess(commands)
     return stdout
 
@@ -85,7 +78,6 @@ def createFileAndMetrics(user, time, text, path):
     # so metrics
     bandit = getBanditResult(filename)
     radon = getRadonResult(filename)
-    prospector = getProspectorResult(filename)
     vulture = getVultureResult(filename)
     mccabe = getMcCabeResult(filename)
     pylint = getPylintResult(filename)
@@ -116,7 +108,6 @@ def createFileAndMetrics(user, time, text, path):
         multi=j[filename]["multi"],
         blank=j[filename]["blank"],
         singleComments=j[filename]["single_comments"],
-        prospector=prospector,
     )
 
     return f

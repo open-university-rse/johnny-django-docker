@@ -17,6 +17,7 @@
             <th>Multi</th>
             <th>Blank</th>
             <th>Single Comments</th>
+            <th>Bandit Issues</th>
         </tr>
     </thead>
     {% for file in files %}
@@ -31,7 +32,8 @@
         <td>{{file.comments}}</td>
         <td>{{file.multi}}</td>
         <td>{{file.blank}}</td>
-        <td>{{file.singleComments}}</td>     
+        <td>{{file.singleComments}}</td>    
+        <td> {{metrics.bandit}}</td>   
                
     </tr>
     {% endfor %} 

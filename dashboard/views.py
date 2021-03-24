@@ -98,10 +98,17 @@ def user_history_dashboard(request, username):
 def userFilesDashboard(request, username):
     user = User.objects.get(username=username)
     files = Files.objects.filter(user=user)
+
+    metrics = []
+    for file in files:
+        event = {
+            "bandit": file.bandit,
+        }
+        metrics.append(dict(event))
     
     t = template.loader.get_template("user_files_dashboard.html")
     html = t.render(
-        {"username": username, "files": files}
+        {"username": username, "files": files, "metrics": metrics}
     )
     return HttpResponse(html)
 

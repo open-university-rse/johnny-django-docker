@@ -88,7 +88,7 @@ class Command(BaseCommand):
 
         Clipboard.objects.create(user= thisUser2, time=new_datetime, text="oiwejcunweoiucnwoeiuxdnwoeincwije")
 
-        createFileAndMetrics(user= thisUser2, time=new_datetime, text="var = 2 *56", path = "home/paul/Desktop/math.py")
+        createFileAndMetrics(user= thisUser2, time=new_datetime, text="assert true", path = "home/paul/Desktop/math.py")
 
         # add me as a user
         paul = User.objects.create_user(

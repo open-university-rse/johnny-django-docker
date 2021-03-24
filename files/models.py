@@ -25,33 +25,54 @@ class Files(models.Model):
     blank = models.IntegerField(blank=True)
     singleComments = models.IntegerField(blank=True)
     prospector = models.TextField(blank=True)
+    
 
-
-def getBanditResult(fileName):
+def runProcess(commands):
     process = subprocess.run(
-        ["bandit", "-f", "json", fileName],
+        commands,
         stdout=subprocess.PIPE,
         universal_newlines=True,
     )
     return process.stdout
+
+def getBanditResult(fileName):
+    commands = ["bandit", "-f", "json", fileName]
+    stdout = runProcess(commands)
+    return stdout
 
 
 def getRadonResult(fileName):
-    process = subprocess.run(
-        ["radon", "raw", "-j", fileName],
-        stdout=subprocess.PIPE,
-        universal_newlines=True,
-    )
-    return process.stdout
+    commands = ["radon", "raw", "-j", fileName]
+    stdout = runProcess(commands)
+    return stdout
 
 
 def getProspectorResult(fileName):
-    process = subprocess.run(
-        ["prospector", "--output-format", "json", "--without-tool", "bandit", fileName],
-        stdout=subprocess.PIPE,
-        universal_newlines=True,
-    )
-    return process.stdout
+    commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "vulture",  fileName]
+    stdout = runProcess(commands)
+    return stdout
+
+def getVultureResult(fileName):
+    commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "vulture",  fileName]
+    stdout = runProcess(commands)
+    return stdout
+
+def getDodgyResult(fileName):
+    commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "dodgy",  fileName]
+    stdout = runProcess(commands)
+    return stdout
+
+def getPylintResult(fileName):
+    commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "pylint",  fileName]
+    stdout = runProcess(commands)
+    return stdout
+
+def getMcCabeResult(fileName):
+    commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "mccabe",  fileName]
+    stdout = runProcess(commands)
+    return stdout
+
+
 
 
 def createFileAndMetrics(user, time, text, path):
@@ -65,11 +86,16 @@ def createFileAndMetrics(user, time, text, path):
     bandit = getBanditResult(filename)
     radon = getRadonResult(filename)
     prospector = getProspectorResult(filename)
+    vulture = getVultureResult(filename)
+    mccabe = getMcCabeResult(filename)
+    pylint = getPylintResult(filename)
+    dodgy = getDodgyResult(filename)
+
+    print(mccabe)
 
     banditIssueString = []
     banditJson = json.loads(bandit)
     for result in banditJson["results"]:
-        print(result["test_id"])
         banditIssueString.append(result["test_id"])
 
 

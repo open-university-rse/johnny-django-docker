@@ -1,0 +1,37 @@
+{
+    "summary": {
+      "started": "2021-03-23 20:33:18.224154",
+      "libraries": [
+        "django"
+      ],
+      "strictness": null,
+      "profiles": "default, no_doc_warnings, no_test_warnings, strictness_medium, strictness_high, strictness_veryhigh, no_member_warnings",
+      "tools": [
+        "dodgy",
+        "mccabe",
+        "pep257",
+        "pep8",
+        "profile-validator",
+        "pyflakes",
+        "pylint"
+      ],
+      "message_count": 1,
+      "completed": "2021-03-23 20:33:18.416530",
+      "time_taken": "0.19",
+      "formatter": "json"
+    },
+    "messages": [
+      {
+        "source": "pylint",
+        "code": "undefined-variable",
+        "location": {
+          "path": "tests/temp/createFileAndMetrics.py",
+          "module": "createFileAndMetrics",
+          "function": null,
+          "line": 1,
+          "character": 7
+        },
+        "message": "Undefined variable 'true'"
+      }
+    ]
+  }

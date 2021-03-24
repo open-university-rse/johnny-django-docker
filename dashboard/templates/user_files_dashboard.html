@@ -18,6 +18,10 @@
             <th>Blank</th>
             <th>Single Comments</th>
             <th>Bandit Issues</th>
+            <th>Vulture Issues</th>
+            <th>McCabe Issues</th>
+            <th>Pylint Issues</th>
+            <th>Dodgy Issues</th>
         </tr>
     </thead>
     {% for file in files %}
@@ -33,7 +37,13 @@
         <td>{{file.multi}}</td>
         <td>{{file.blank}}</td>
         <td>{{file.singleComments}}</td>    
-        <td> {{metrics.bandit}}</td>   
+        <td>{{metrics.bandit}}</td>   
+        <td>{{metrics.vulture}}</td>
+        <td>{{metrics.mccabe}}</td>
+        <td>{{metrics.pylint}}</td>
+        <td>{{metrics.dodgy}}</td>
+        
+
                
     </tr>
     {% endfor %} 

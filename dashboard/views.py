@@ -103,6 +103,10 @@ def userFilesDashboard(request, username):
     for file in files:
         event = {
             "bandit": file.bandit,
+            "mccabe": file.mccabe,
+            "dodgy": file.dodgy,
+            "vulture": file.vulture,
+            "pylint": file.pylint,
         }
         metrics.append(dict(event))
     

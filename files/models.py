@@ -24,6 +24,10 @@ class Files(models.Model):
     multi = models.IntegerField(blank=True)
     blank = models.IntegerField(blank=True)
     singleComments = models.IntegerField(blank=True)
+    vulture = models.TextField(blank=True)
+    mccabe = models.TextField(blank=True)
+    pylint = models.TextField(blank=True)
+    dodgy = models.TextField(blank=True)
 
 
 def runProcess(commands):
@@ -39,7 +43,6 @@ def getBanditResult(fileName):
     stdout = runProcess(commands)
     return stdout
 
-
 def getRadonResult(fileName):
     commands = ["radon", "raw", "-j", fileName]
     stdout = runProcess(commands)
@@ -48,22 +51,26 @@ def getRadonResult(fileName):
 def getVultureResult(fileName):
     commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "vulture",  fileName]
     stdout = runProcess(commands)
-    return stdout
+    json_version = json.loads(stdout)
+    return json_version["messages"]
 
 def getDodgyResult(fileName):
     commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "dodgy",  fileName]
     stdout = runProcess(commands)
-    return stdout
+    json_version = json.loads(stdout)
+    return json_version["messages"]
 
 def getPylintResult(fileName):
     commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "pylint",  fileName]
     stdout = runProcess(commands)
-    return stdout
+    json_version = json.loads(stdout)
+    return json_version["messages"]
 
 def getMcCabeResult(fileName):
     commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "mccabe",  fileName]
     stdout = runProcess(commands)
-    return stdout
+    json_version = json.loads(stdout)
+    return json_version["messages"]
 
 
 
@@ -75,7 +82,7 @@ def createFileAndMetrics(user, time, text, path):
     f.write(text)
     f.close()
 
-    # so metrics
+    # get metrics
     bandit = getBanditResult(filename)
     radon = getRadonResult(filename)
     vulture = getVultureResult(filename)
@@ -108,6 +115,11 @@ def createFileAndMetrics(user, time, text, path):
         multi=j[filename]["multi"],
         blank=j[filename]["blank"],
         singleComments=j[filename]["single_comments"],
+        vulture = vulture,
+        mccabe = mccabe,
+        pylint = pylint,
+        dodgy = dodgy,
+        
     )
 
     return f

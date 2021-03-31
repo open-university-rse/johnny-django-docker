@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'files',
     'messaging',
     'dashboard',
+    'githubRepro',
 ]
 
 MIDDLEWARE = [

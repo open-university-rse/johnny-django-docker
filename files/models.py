@@ -73,8 +73,6 @@ def getMcCabeResult(fileName):
     return json_version["messages"]
 
 
-
-
 def createFileAndMetrics(user, time, text, path):
     # create file for bandit and radon
     filename = settings.TEST_DIR + "createFileAndMetrics.py"

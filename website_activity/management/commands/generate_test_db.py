@@ -80,6 +80,11 @@ class Command(BaseCommand):
         time = datetime(2012, 1, 14, 12, 2, 0, tzinfo=timezone.utc)
         createFileAndMetrics(user=thisUser, time=time, text="print('hello world')", path = "home/paul/Desktop/intro.py")
 
+        f = open("tests/advancedTest1.py", "r")
+        advancedText = f.read()
+        time = datetime(2012, 1, 14, 12, 2, 0, tzinfo=timezone.utc)
+        createFileAndMetrics(user=thisUser, time=time, text=advancedText, path = "home/paul/Desktop/intro.py")
+
         thisUser2 = User.objects.get(username="gloynes1")
         f_time = 1612537600.0
         dt = datetime.fromtimestamp(int(f_time))

@@ -6,7 +6,7 @@ from freezegun import freeze_time
 import datetime
 from django.conf import settings
 import json
-
+from icecream import ic
 
 class FilesTest(TestCase):
     def setUp(self):
@@ -102,7 +102,6 @@ class FilesTest(TestCase):
         text = "import pickle\nassert true\n"
         path = "/home/user/paul"
         time = datetime.datetime(2012, 1, 14, 12, 0, 1, tzinfo=timezone.utc)
-
         newFile = createFileAndMetrics(user=self.paul, text=text, time=time, path=path)
 
         self.assertEqual(newFile.user, self.paul)

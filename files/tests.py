@@ -1,12 +1,12 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Files, getBanditResult, getRadonResult, createFileAndMetrics, getProspectorResult
+from .models import Files, getBanditResult, getRadonResult, createFileAndMetrics
 from django.utils import timezone
 from freezegun import freeze_time
 import datetime
 from django.conf import settings
 import json
-
+from icecream import ic
 
 class FilesTest(TestCase):
     def setUp(self):
@@ -51,15 +51,6 @@ class FilesTest(TestCase):
         j = json.loads(report)
         self.assertEqual(j["results"][0]["test_id"], "B101")
 
-    def testGetProspector(self):
-        filename = settings.TEST_DIR + "testGetProspector.py"
-        f = open(filename, "w")
-        f.write("assert true")
-        f.close()
-
-        report = getProspectorResult(filename)
-        j = json.loads(report)
-        self.assertEqual(j["summary"]["libraries"], ['django'])
 
     def testGetRadonFile(self):
         # {"tests/temp/testGetRadonFile.py": {"loc": 1, "lloc": 1, "sloc": 1, "comments": 0, "multi": 0, "blank": 0, "single_comments": 0}}
@@ -100,20 +91,17 @@ class FilesTest(TestCase):
         self.assertEqual(newFile.blank, 0)
         self.assertEqual(newFile.singleComments, 0)
 
+        self.assertEqual(newFile.banditIssues, '["B101"]')
+
         report = newFile.bandit
         j = json.loads(report)
         self.assertEqual(j["results"][0]["test_id"], "B101")
-
-        pros = newFile.prospector
-        j = json.loads(pros)
-        self.assertEqual(j["summary"]["libraries"], ['django'])
 
 
     def testCreateFileAndMetrics2(self):
         text = "import pickle\nassert true\n"
         path = "/home/user/paul"
         time = datetime.datetime(2012, 1, 14, 12, 0, 1, tzinfo=timezone.utc)
-
         newFile = createFileAndMetrics(user=self.paul, text=text, time=time, path=path)
 
         self.assertEqual(newFile.user, self.paul)
@@ -131,11 +119,9 @@ class FilesTest(TestCase):
         self.assertEqual(newFile.blank, 0)
         self.assertEqual(newFile.singleComments, 0)
 
+        self.assertEqual(newFile.banditIssues, '["B403", "B101"]')
+
         report = newFile.bandit
         j = json.loads(report)
         self.assertEqual(j["results"][0]["test_id"], "B403")
         self.assertEqual(j["results"][1]["test_id"], "B101")
-
-        pros = newFile.prospector
-        j = json.loads(pros)
-        self.assertEqual(j["summary"]["libraries"], ['django'])

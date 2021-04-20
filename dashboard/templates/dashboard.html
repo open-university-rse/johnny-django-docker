@@ -9,18 +9,20 @@
         <tr>
             <th>Username</th>
             <th>ID</th>
-            <th>Num files</th>
-            <th>Num Clips</th>
-            <th>Num links</th>
+            <th>File saves</th>
+            <th>Clipboards</th>
+            <th>Websites</th>
+            <th>History</th>
         </tr>
     </thead>
     {% for item in data %}
     <tr> 
-        <td> <a href="/dashboard/history/{{item.name}}"> {{item.name}} </a> </td>
+        <td> {{item.name}}  </td>
         <td>{{item.id}}</td>
-        <td>{{item.numfiles}}</td>
-        <td>{{item.numclips}}</td>
-        <td>{{item.numlinks}}</td>
+        <td><a href="/dashboard/files/{{item.name}}"> {{item.numfiles}}</a> </td>
+        <td><a href="/dashboard/clipboards/{{item.name}}"> {{item.numclips}}</a> </td>
+        <td><a href="/dashboard/websites/{{item.name}}">{{item.numlinks}}</a></td>
+        <td><a href="/dashboard/history/{{item.name}}"> History </a> </td>
                
     </tr>
     {% endfor %} 

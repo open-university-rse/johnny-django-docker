@@ -1,1 +1,1 @@
-var = 2 *56
+assert true

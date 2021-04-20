@@ -6,6 +6,7 @@ import subprocess
 import tempfile
 import json
 
+
 # Create your models here.
 class Files(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -15,6 +16,7 @@ class Files(models.Model):
 
     # metrics
     bandit = models.TextField(blank=True)
+    banditIssues = models.TextField(blank=True)
     loc = models.IntegerField(blank=True)
     lloc = models.IntegerField(blank=True)
     sloc = models.IntegerField(blank=True)
@@ -22,45 +24,79 @@ class Files(models.Model):
     multi = models.IntegerField(blank=True)
     blank = models.IntegerField(blank=True)
     singleComments = models.IntegerField(blank=True)
-    prospector = models.TextField(blank=True)
+    vulture = models.TextField(blank=True)
+    mccabe = models.TextField(blank=True)
+    pylint = models.TextField(blank=True)
+    dodgy = models.TextField(blank=True)
+
+
+def runProcess(commands):
+    process = subprocess.run(
+        commands,
+        stdout=subprocess.PIPE,
+        universal_newlines=True,
+    )
+    return process.stdout
 
 def getBanditResult(fileName):
-    process = subprocess.run(
-        ["bandit", "-f", "json", fileName],
-        stdout=subprocess.PIPE,
-        universal_newlines=True,
-    )
-    return process.stdout
-
+    commands = ["bandit", "-f", "json", fileName]
+    stdout = runProcess(commands)
+    return stdout
 
 def getRadonResult(fileName):
-    process = subprocess.run(
-        ["radon", "raw", "-j", fileName],
-        stdout=subprocess.PIPE,
-        universal_newlines=True,
-    )
-    return process.stdout
+    commands = ["radon", "raw", "-j", fileName]
+    stdout = runProcess(commands)
+    return stdout
 
-def getProspectorResult(fileName):
-    process = subprocess.run(
-        ["prospector", "--output-format", "json", "--without-tool", "bandit", fileName],
-        stdout=subprocess.PIPE,
-        universal_newlines=True,
-    )
-    return process.stdout
+def getVultureResult(fileName):
+    commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "vulture",  fileName]
+    stdout = runProcess(commands)
+    json_version = json.loads(stdout)
+    return json_version["messages"]
+
+def getDodgyResult(fileName):
+    commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "dodgy",  fileName]
+    stdout = runProcess(commands)
+    json_version = json.loads(stdout)
+    return json_version["messages"]
+
+def getPylintResult(fileName):
+    commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "pylint",  fileName]
+    stdout = runProcess(commands)
+    json_version = json.loads(stdout)
+    return json_version["messages"]
+
+def getMcCabeResult(fileName):
+    commands = ["prospector", "--output-format", "json", "--strictness", "high", "--tool", "mccabe",  fileName]
+    stdout = runProcess(commands)
+    json_version = json.loads(stdout)
+    return json_version["messages"]
+
+
 
 
 def createFileAndMetrics(user, time, text, path):
-    # create file for bandit and radon 
+    # create file for bandit and radon
     filename = settings.TEST_DIR + "createFileAndMetrics.py"
     f = open(filename, "w")
     f.write(text)
     f.close()
-    
-    # so metrics
+
+    # get metrics
     bandit = getBanditResult(filename)
     radon = getRadonResult(filename)
-    prospector = getProspectorResult(filename)
+    vulture = getVultureResult(filename)
+    mccabe = getMcCabeResult(filename)
+    pylint = getPylintResult(filename)
+    dodgy = getDodgyResult(filename)
+
+    print(mccabe)
+
+    banditIssueString = []
+    banditJson = json.loads(bandit)
+    for result in banditJson["results"]:
+        banditIssueString.append(result["test_id"])
+
 
     # load radon json
     j = json.loads(radon)
@@ -71,16 +107,19 @@ def createFileAndMetrics(user, time, text, path):
         text=text,
         path=path,
         bandit=bandit,
-        loc=j[filename]['loc'],
-        lloc=j[filename]['lloc'],
-        sloc=j[filename]['sloc'],
-        comments=j[filename]['comments'],
-        multi=j[filename]['multi'],
-        blank=j[filename]['blank'],
-        singleComments=j[filename]['single_comments'],
-        prospector=prospector,
+        banditIssues=json.dumps(banditIssueString),
+        loc=j[filename]["loc"],
+        lloc=j[filename]["lloc"],
+        sloc=j[filename]["sloc"],
+        comments=j[filename]["comments"],
+        multi=j[filename]["multi"],
+        blank=j[filename]["blank"],
+        singleComments=j[filename]["single_comments"],
+        vulture = vulture,
+        mccabe = mccabe,
+        pylint = pylint,
+        dodgy = dodgy,
+        
     )
 
     return f
-
-

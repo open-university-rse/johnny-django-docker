@@ -80,6 +80,11 @@ class Command(BaseCommand):
         time = datetime(2012, 1, 14, 12, 2, 0, tzinfo=timezone.utc)
         createFileAndMetrics(user=thisUser, time=time, text="print('hello world')", path = "home/paul/Desktop/intro.py")
 
+        f = open("tests/advancedTest1.py", "r")
+        advancedText = f.read()
+        time = datetime(2012, 1, 14, 12, 2, 0, tzinfo=timezone.utc)
+        createFileAndMetrics(user=thisUser, time=time, text=advancedText, path = "home/paul/Desktop/intro.py")
+
         thisUser2 = User.objects.get(username="gloynes1")
         f_time = 1612537600.0
         dt = datetime.fromtimestamp(int(f_time))
@@ -88,5 +93,14 @@ class Command(BaseCommand):
 
         Clipboard.objects.create(user= thisUser2, time=new_datetime, text="oiwejcunweoiucnwoeiuxdnwoeincwije")
 
-        createFileAndMetrics(user= thisUser2, time=new_datetime, text="var = 2 *56", path = "home/paul/Desktop/math.py")
+        createFileAndMetrics(user= thisUser2, time=new_datetime, text="assert true", path = "home/paul/Desktop/math.py")
+
+        # add me as a user
+        paul = User.objects.create_user(
+                first_name='Paul',
+                last_name='Lunn',
+                username='paulilunn',
+                email='paul@johnny.co.uk',
+                password="password",
+            )
 

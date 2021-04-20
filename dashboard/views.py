@@ -94,3 +94,45 @@ def user_history_dashboard(request, username):
     html = t.render({"data": data, "username": username})
 
     return HttpResponse(html)
+
+def userFilesDashboard(request, username):
+    user = User.objects.get(username=username)
+    files = Files.objects.filter(user=user)
+
+    metrics = []
+    for file in files:
+        event = {
+            "bandit": file.bandit,
+            "mccabe": file.mccabe,
+            "dodgy": file.dodgy,
+            "vulture": file.vulture,
+            "pylint": file.pylint,
+        }
+        metrics.append(dict(event))
+    
+    t = template.loader.get_template("user_files_dashboard.html")
+    html = t.render(
+        {"username": username, "files": files, "metrics": metrics}
+    )
+    return HttpResponse(html)
+
+def userWebsDashboard(request, username):
+    user = User.objects.get(username=username)
+    webs = Website_activity.objects.filter(user=user)
+    
+    t = template.loader.get_template("user_web_dashboard.html")
+    html = t.render(
+        {"username": username, "webs": webs}
+    )
+    return HttpResponse(html)
+
+def userClipboardsDashboard(request, username):
+    user = User.objects.get(username=username)
+    clipboards = Clipboard.objects.filter(user=user)
+    
+    t = template.loader.get_template("user_clipboards_dashboard.html")
+    html = t.render(
+        {"username": username, "clipboards": clipboards}
+    )
+    return HttpResponse(html)
+

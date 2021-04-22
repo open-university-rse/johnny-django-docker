@@ -24,3 +24,11 @@ When a python file is received the contents are stored and several static analys
 # Future work
 
 It was intended to create a machine laerning interface which takes the static anaysis tools, clipboard contents, and website history as inputs to the learning set.
+
+# Images from demo
+
+![vscode](https://user-images.githubusercontent.com/72147267/115699141-4af83a80-a35d-11eb-9f84-8b99264fd18c.png)
+![slack_integration](https://user-images.githubusercontent.com/72147267/115699165-52b7df00-a35d-11eb-8666-d0b659449df2.png)
+![django_metrics_display](https://user-images.githubusercontent.com/72147267/115699193-58adc000-a35d-11eb-9690-b859dcb9460d.png)
+![django_user_history](https://user-images.githubusercontent.com/72147267/115699220-5d727400-a35d-11eb-8381-dbe05cc41469.png)
+![django_database_dashboard](https://user-images.githubusercontent.com/72147267/115699240-619e9180-a35d-11eb-81de-8b3dded974c0.png)
